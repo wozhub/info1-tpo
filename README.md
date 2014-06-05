@@ -1,13 +1,11 @@
 # **Informática I** (Curso R1041)
-## Trabajo práctico obligatorio.
-## Juego de Chinchón en red.
+# TPO - Juego de Chinchón en red
 
 ## Integrantes 
 * **Iannuzzi**, Franco. 
 * **Ranú**, Agustín. 
 * **Vinazza**, David.
 
-\pagebreak
 
 ## Introducción
 
@@ -22,8 +20,6 @@ Representación de números y caracteres. Números aleatorios. Estructuras. Memo
 ### Herramientas utilizadas
 
 El código se desarrolló utilizando *Kate* y *Vim* de forma indistinta. Se compiló en un entorno Linux mediante *Gcc*. Además se utilizó la aplicacióń *UberWriter* para escribir este informe en formato markdown y latex, junto con la herramienta web *draw.io* para el diagrama de flujo de la máquina de estados.
-
-\pagebreak
 
 ## Práctica
 
@@ -76,8 +72,6 @@ Durante la investigación previa al desarrollo del proyecto descubrimos que en e
 Sabido esto, consideramos la *serialización* no es parte del propósito de este trabajo práctico por tanto pertenece a contenidos más avanzados. 
 
 [^1]: Dependiendo de la plataforma pueden existir diferentes *alignments* y *endianness*.
-
-\pagebreak 
 
 ## Conclusión
 
