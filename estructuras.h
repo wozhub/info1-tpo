@@ -20,6 +20,8 @@ typedef struct t_mazo {
     unsigned int cantidad;
 } t_mazo;
 
+/* A cada jugador de asignamos una estructura con nombre, puntaje y el socket 
+ * */
 typedef struct t_jugador {
     char* nombre;
     int puntaje;

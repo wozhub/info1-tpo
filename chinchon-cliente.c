@@ -16,7 +16,6 @@ static char* palos[] = { "Comodín","Espada","Oro","Basto","Copa" };
 /* funcion para debuguear en paz
 void _pausa() {  while( getch() != KEY_DOWN ) {  } } */ 
 
-
 char elegirCierre() {
     char i=0; int entrada;
     WINDOW *v= (WINDOW *) nuevaVentana(5,15,12,70);
@@ -36,6 +35,7 @@ char elegirCierre() {
 
 int main( int argc, char* argv[] ) {
 
+    //verifico los argumentos ingresados por linea de comando
     if ( argc != 3 ) { 
         printf("Requiere IP servidor y nombre del jugador para ejecutarse.\n");
         printf("Ej: %s 192.168.1.100 Chino\n\n",argv[0]);
@@ -72,6 +72,12 @@ int main( int argc, char* argv[] ) {
         notificar(notificacion);
 
         signalAux=recibirSenial(socket);
+
+        /* Seria mas prolijo encerrar cada caso en una funcion, tipo
+         *  0: recibirCartas()
+         *  1: turnoNormal()
+         *  2: turnoCierre() 
+         */
         switch (signalAux) {
             case 0:
                 sprintf(notificacion,"0: Voy a recibir las 7 cartas iniciales.\n");
