@@ -13,8 +13,10 @@
 
 static char* palos[] = { "Comodín","Espada","Oro","Basto","Copa" };
 
-/* funcion para debuguear en paz
-void _pausa() {  while( getch() != KEY_DOWN ) {  } } */ 
+#ifdef DEBUG
+//funcion para debuguear en paz
+void _pausa() {  while( getch() != KEY_DOWN ) {  } }
+#endif
 
 char elegirCierre() {
     char i=0; int entrada;
@@ -166,14 +168,19 @@ int main( int argc, char* argv[] ) {
                 char seleccion[7]={0,0,0,0,0,0,0};
                 cartas_enviadas=0;
                 while (cartas_enviadas != 7) {
-                    /* Debug Seleccion
-                    for (i=0;i<7;i++) { printw("%d\t",seleccion[i]); } _pausa(); */
 
-                    /* Debug Ventanas Existentes
+                    #ifdef DEBUG
+                    // Debug Seleccion
+                    for (i=0;i<7;i++) { printw("%d\t",seleccion[i]); } _pausa();
+                    #endif
+
+                    #ifdef DEBUG
+                    // Debug Ventanas Existentes
                     for (j=0;j<7;j++) {
                         if (ventanas_c[j] == NULL) { printw("ventanas_c[%d] es nulo.\n",j); }
                         else { printw("ventanas_c[%d] no es nulo.\n",j); }
-                    } _pausa(); */
+                    } _pausa();
+                    #endif
 
                     i=0;
                     dibujarManoSeleccion(ventanas_c,manoJugador,i,seleccion);
@@ -198,11 +205,15 @@ int main( int argc, char* argv[] ) {
                         j=0;k=0;
                         for (i=0;i<7;i++) {
                             if ( seleccion[i] == 1 ) {
-                                //d printw("Agregando %d de %s al arreglo de cartas a enviar.\n",manoJugador[i]->valor,palos[manoJugador[i]->palo]);
+                                #ifdef DEBUG
+                                printw("Agregando %d de %s al arreglo de cartas a enviar.\n",manoJugador[i]->valor,palos[manoJugador[i]->palo]);
+                                #endif
                                 juegosAux1[j]=manoJugador[i]; j++; //j es el numero de cartas a enviar
                             }
                             else if ( seleccion[i] == 0 ) {
-                                //d printw("Agregando %d de %s al arreglo de cartas a conservar.\n",manoJugador[i]->valor,palos[manoJugador[i]->palo]);
+                                #ifdef DEBUG
+                                printw("Agregando %d de %s al arreglo de cartas a conservar.\n",manoJugador[i]->valor,palos[manoJugador[i]->palo]);
+                                #endif
                                 juegosAux2[k]=manoJugador[i]; k++; //k es el numero de cartas restantes
                             }
                         }
@@ -218,20 +229,28 @@ int main( int argc, char* argv[] ) {
 
                         /* Rearmo manoJugador con las cartas resantes */ 
                         for (i=0; i<k; i++) {
-                            //d printw("Agregando %d de %s a manoJugador[%d].\n",juegosAux2[i]->valor,palos[juegosAux2[i]->palo],i);
+                            #ifdef DEBUG
+                            printw("Agregando %d de %s a manoJugador[%d].\n",juegosAux2[i]->valor,palos[juegosAux2[i]->palo],i);
+                            #endif
                             manoJugador[i]=juegosAux2[i]; seleccion[i]=0; }
 
                         for (i=k; i<k+j; i++) { /* recorro solo las cartas que no envie antes */
-                            //d printw("Seteando NULL manoJugador[%d].\n",i);
+                            #ifdef DEBUG
+                            printw("Seteando NULL manoJugador[%d].\n",i);
+                            #endif
                             manoJugador[i]=NULL; seleccion[i]=-1; borrarVentana(ventanas_c[i]);
                         }
-
-                        //d printw("k=%d j=%d enviadas=%d",k,j,cartas_enviadas); _pausa();
+                        
+                        #ifdef DEBUG
+                        printw("k=%d j=%d enviadas=%d",k,j,cartas_enviadas); _pausa();
+                        #endif
                         
                         cartas_enviadas+=j;
 
-                        /* Debug Auxiliares 
-                        printw("Libero los auxiliares.\n"); _pausa(); */
+                        #ifdef DEBUG
+                        // Debug Auxiliares 
+                        printw("Libero los auxiliares.\n"); _pausa();
+                        #endif
                         free(juegosAux1); free(juegosAux2);
                     }
 

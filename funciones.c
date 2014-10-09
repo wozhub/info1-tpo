@@ -67,7 +67,10 @@ t_carta* nuevaCarta(char palo, char valor) {
 void agregarCarta(t_mazo* mazo, t_carta* carta) {
     /* En caso de que no se pueda crear la carta y reciba un puntero a null, no lo agrego al mazo */
     if ( carta != NULL ) {
-        //d printf("Agregando el %d de %d al mazo.\n", (int) carta->valor, (int) carta->palo);
+        #ifdef DEBUG
+        printf("Agregando el %d de %d al mazo.\n", (int) carta->valor, (int) carta->palo);
+        #endif
+
         if ( mazo->cantidad == 0 ) { /* El mazo esta vacio */
             mazo->primera=carta; 
             mazo->ultima=carta; }
@@ -94,7 +97,9 @@ t_carta* sacarCartaAzar(t_mazo *mazo) {
     if ( mazo->cantidad > 0 ) {
         int carta_numero = rand() % mazo->cantidad;
         unsigned int i;
-        //d printf("Voy a sacar la carta de la posicion %d.\n",carta_numero);
+        #ifdef DEBUG
+        printf("Voy a sacar la carta de la posicion %d.\n",carta_numero);
+        #endif
 
         if ( carta_numero == 0 ) { //caso especial: sacar el primer elemento. no tiene anterior
             carta=mazo->primera;
@@ -329,12 +334,19 @@ void repartirCartas(t_jugador *jugadores[], t_mazo *mazo) {
     t_carta *cartaAux;
 
     for (i=0; i<J_MAXJUGADORES; i++) {
-        //d printf("Repartiendo cartas a %s\n",jugadores[i]->nombre);
+        #ifdef DEBUG
+        printf("Repartiendo cartas a %s\n",jugadores[i]->nombre);
+        #endif
+
         enviarSenial(jugadores[i]->socket, 0);
 
         for (j=0; j<7; j++) {
             cartaAux=sacarCartaAzar(mazo);
-            //d printf("Enviando %d de %d a %s",cartaAux->valor,cartaAux->palo,jugadores[i]->nombre);
+            
+            #ifdef DEBUG
+            printf("Enviando %d de %d a %s",cartaAux->valor,cartaAux->palo,jugadores[i]->nombre);
+            #endif
+
             enviarCarta(jugadores[i]->socket, cartaAux); 
         }
     }
